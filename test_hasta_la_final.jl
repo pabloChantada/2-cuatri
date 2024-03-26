@@ -86,48 +86,104 @@ end
 using Test
 include("35634619Y_48114048A_32740686W_48111913F.jl")
 
+#=
+VN FP
+FN VP
+=#
+
+outputs = [true, true, true]
+targets = [false, false, false]
+expected_matrix = [0 3; 
+                    0 0]
+expected_accuracy = 1.0
+expected_fail_rate = 0.0
+expected_sensitivity = 1.0
+expected_specificity = 0.0
+expected_positive_predictive_value = 1.0
+expected_negative_predictive_value = 0.0
+expected_f_score = 1.0
+
+matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
+
+@test matrix == expected_matrix
+@test matrix_accuracy ≈ expected_accuracy
+@test fail_rate ≈ expected_fail_rate
+@test sensitivity ≈ expected_sensitivity
+@test specificity ≈ expected_specificity
+@test positive_predictive_value ≈ expected_positive_predictive_value
+@test negative_predictive_value ≈ expected_negative_predictive_value
+@test f_score ≈ expected_f_score
+
+outputs = [true, true, true]
+targets = [true, true, true]
+expected_matrix = [0 0; 
+                    0 3]
+expected_accuracy = 1.0
+expected_fail_rate = 0.0
+expected_sensitivity = 1.0
+expected_specificity = 0.0
+expected_positive_predictive_value = 1.0
+expected_negative_predictive_value = 0.0
+expected_f_score = 1.0
+
+matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
+
+@test matrix == expected_matrix
+@test matrix_accuracy ≈ expected_accuracy
+@test fail_rate ≈ expected_fail_rate
+@test sensitivity ≈ expected_sensitivity
+@test specificity ≈ expected_specificity
+@test positive_predictive_value ≈ expected_positive_predictive_value
+@test negative_predictive_value ≈ expected_negative_predictive_value
+@test f_score ≈ expected_f_score
+
 # Test case 1: Confusion matrix with all correct predictions
-@testset "Confusion matrix with all correct predictions" begin
-    outputs = [true, true, true]
-    targets = [true, true, true]
-    expected_matrix = [0 0; 
-                        0 3]
-    expected_accuracy = 1.0
-    expected_fail_rate = 0.0
-    expected_sensitivity = 1.0
-    expected_specificity = 0.0
-    expected_positive_predictive_value = 1.0
-    expected_negative_predictive_value = 0.0
-    expected_f_score = 1.0
+outputs = [true, true, true]
+targets = [true, true, true]
+expected_matrix = [0 0; 
+                    0 3]
+expected_accuracy = 1.0
+expected_fail_rate = 0.0
+expected_sensitivity = 1.0
+expected_specificity = 0.0
+expected_positive_predictive_value = 1.0
+expected_negative_predictive_value = 0.0
+expected_f_score = 1.0
 
-    matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
+matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
 
-    @test matrix == expected_matrix
-    @test matrix_accuracy ≈ expected_accuracy
-    @test fail_rate ≈ expected_fail_rate
-    @test sensitivity ≈ expected_sensitivity
-    @test specificity ≈ expected_specificity
-    @test positive_predictive_value ≈ expected_positive_predictive_value
-    @test negative_predictive_value ≈ expected_negative_predictive_value
-    @test f_score ≈ expected_f_score
-end
+@test matrix == expected_matrix
+@test matrix_accuracy ≈ expected_accuracy
+@test fail_rate ≈ expected_fail_rate
+@test sensitivity ≈ expected_sensitivity
+@test specificity ≈ expected_specificity
+@test positive_predictive_value ≈ expected_positive_predictive_value
+@test negative_predictive_value ≈ expected_negative_predictive_value
+@test f_score ≈ expected_f_score
 
 # Test case 2: Confusion matrix with all incorrect predictions
-@testset "Confusion matrix with all incorrect predictions" begin
-    outputs = [false, false, false]
-    targets = [true, true, true]
-    expected_matrix = [0 3; 0 0]
-    expected_accuracy = 0.0
-    expected_fail_rate = 1.0
-    expected_sensitivity = 0.0
-    expected_specificity = 0.0
-    expected_positive_predictive_value = 0.0
-    expected_negative_predictive_value = 0.0
-    expected_f_score = 0.0
+outputs = [false, false, false]
+targets = [true, true, true]
+expected_matrix = [0 0; 
+                    3 0]
+expected_accuracy = 0.0
+expected_fail_rate = 1.0
+expected_sensitivity = 0.0
+expected_specificity = 0.0
+expected_positive_predictive_value = 0.0
+expected_negative_predictive_value = 0.0
+expected_f_score = 0.0
 
-    matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
+matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
 
-end
+@test matrix == expected_matrix
+@test matrix_accuracy ≈ expected_accuracy
+@test fail_rate ≈ expected_fail_rate
+@test sensitivity ≈ expected_sensitivity
+@test specificity ≈ expected_specificity
+@test positive_predictive_value ≈ expected_positive_predictive_value
+@test negative_predictive_value ≈ expected_negative_predictive_value
+@test f_score ≈ expected_f_score
 
 # Test case 3: Confusion matrix with mixed predictions
 @testset "Confusion matrix with mixed predictions" begin
@@ -346,149 +402,3 @@ include("35634619Y_48114048A_32740686W_48111913F.jl")
     println("Val losses: ", val_losses)
     println("Test losses: ", test_losses)
 end
-
-
-using Test
-include("35634619Y_48114048A_32740686W_48111913F.jl")
-
-# Test case for confusionMatrix function with single output node
-# @testset "Confusion matrix with single output node" begin
-    outputs = [true true false; true true false; true true false]
-    targets = [true true false; true true false; true true false]
-    expected_matrix = [3 0;
-                         0 6]
-    expected_accuracy = 1.0
-    expected_fail_rate = 0
-    expected_sensitivity = 1.0
-    expected_specificity = 1.0
-    expected_positive_predictive_value = 1.0
-    expected_negative_predictive_value = 1.0
-    expected_f_score = 1.0
-
-    matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets, weighted=false)
-
-    @test matrix == expected_matrix
-    @test matrix_accuracy ≈ expected_accuracy
-    @test fail_rate ≈ expected_fail_rate
-    @test sensitivity ≈ expected_sensitivity
-    @test specificity ≈ expected_specificity
-    @test positive_predictive_value ≈ expected_positive_predictive_value
-    @test negative_predictive_value ≈ expected_negative_predictive_value
-    @test f_score ≈ expected_f_score
-# end
-
-# Test case for confusionMatrix function with multiple output nodes
-@testset "Confusion matrix with multiple output nodes" begin
-    outputs = [true false; true false]
-    targets = [true true; false false]
-    expected_matrix = [1 1; 1 0]
-    expected_accuracy = 0.5
-    expected_fail_rate = 0.5
-    expected_sensitivity = 0.5
-    expected_specificity = 0.0
-    expected_positive_predictive_value = 0.5
-    expected_negative_predictive_value = 0.0
-    expected_f_score = 0.3333333333333333
-
-    matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix = confusionMatrix(outputs, targets)
-
-    @test matrix == expected_matrix
-    @test matrix_accuracy ≈ expected_accuracy
-    @test fail_rate ≈ expected_fail_rate
-    @test sensitivity ≈ expected_sensitivity
-    @test specificity ≈ expected_specificity
-    @test positive_predictive_value ≈ expected_positive_predictive_value
-    @test negative_predictive_value ≈ expected_negative_predictive_value
-    @test f_score ≈ expected_f_score
-end
-
-# Test case for confusionMatrix function with different sizes of outputs and targets
-@testset "Confusion matrix with different sizes of outputs and targets" begin
-    outputs = [true, true, true]
-    targets = [true, true, true, true, true]
-    @test_throws AssertionError confusionMatrix(outputs, targets)
-end
-
-# Test case for confusionMatrix function with weighted option
-@testset "Confusion matrix with weighted option" begin
-    outputs = [true, true, true]
-    targets = [true, true, true]
-    expected_matrix = [0 0; 0 3]
-    expected_accuracy = 1.0
-    expected_fail_rate = 0.0
-    expected_weighted_sensitivity = 1.0
-    expected_weighted_specificity = 0.0
-    expected_weighted_positive_predictive_value = 1.0
-    expected_weighted_negative_predictive_value = 0.0
-    expected_weighted_f_score = 1.0
-
-    acc, fail_rate, weighted_sensitivity, weighted_specificity, weighted_positive_predictive_value, weighted_negative_predictive_value, weighted_f_score, matrix = confusionMatrix(outputs, targets, weighted=true)
-
-    @test matrix == expected_matrix
-    @test acc ≈ expected_accuracy
-    @test fail_rate ≈ expected_fail_rate
-    @test weighted_sensitivity ≈ expected_weighted_sensitivity
-    @test weighted_specificity ≈ expected_weighted_specificity
-    @test weighted_positive_predictive_value ≈ expected_weighted_positive_predictive_value
-    @test weighted_negative_predictive_value ≈ expected_weighted_negative_predictive_value
-    @test weighted_f_score ≈ expected_weighted_f_score
-end
-
-# Test case for confusionMatrix function without weighted option
-@testset "Confusion matrix without weighted option" begin
-    outputs = [true, true, true]
-    targets = [true, true, true]
-    expected_matrix = [0 0; 0 3]
-    expected_accuracy = 1.0
-    expected_fail_rate = 0.0
-    expected_macro_sensitivity = 1.0
-    expected_macro_specificity = 0.0
-    expected_macro_positive_predictive_value = 1.0
-    expected_macro_negative_predictive_value = 0.0
-    expected_macro_f_score = 1.0
-
-    acc, fail_rate, macro_sensitivity, macro_specificity, macro_positive_predictive_value, macro_negative_predictive_value, macro_f_score, matrix = confusionMatrix(outputs, targets, weighted=false)
-
-    @test matrix == expected_matrix
-    @test acc ≈ expected_accuracy
-    @test fail_rate ≈ expected_fail_rate
-    @test macro_sensitivity ≈ expected_macro_sensitivity
-    @test macro_specificity ≈ expected_macro_specificity
-    @test macro_positive_predictive_value ≈ expected_macro_positive_predictive_value
-    @test macro_negative_predictive_value ≈ expected_macro_negative_predictive_value
-    @test macro_f_score ≈ expected_macro_f_score
-end
-
-#=
-include("35634619Y_48114048A_32740686W_48111913F.jl")
-outputs = [true true true;
-            false false false;
-            true true true]
-
-targets = [true true true;
-            false false false;
-            true true true]
-
-sensitivity = zeros(size(outputs, 2))
-specificity = zeros(size(outputs, 2))
-positive_predictive_value = zeros(size(outputs, 2))
-negative_predictive_value = zeros(size(outputs, 2))
-f_score = zeros(size(outputs, 2))
-
-for i = 1:(size(outputs, 2))
-    #matrix_accuracy, fail_rate, sensitivity, specificity, positive_predictive_value, negative_predictive_value, f_score, matrix
-    _, _, sensitivity[i], specificity[i], positive_predictive_value[i], negative_predictive_value[i], f_score[i], _ = confusionMatrix(outputs[:,i], targets[:,i])
-end       
-# esto esta mal
-# Define the unique classes
-
-# Create the confusion matrix
-matrix = zeros(Int, size(outputs, 2), size(outputs, 2))
-for real in 1:size(outputs, 1)
-    for predicted in 1:size(outputs, 2)
-        if outputs[real, predicted] == true && targets[real, predicted] == true
-            matrix[real, predicted] += 1
-        end
-    end
-end
-=#

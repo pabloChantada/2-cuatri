@@ -1,23 +1,6 @@
 using Test
 
 # Assuming you have defined the trainClassANN function
-
-
-# Step 3: Call the trainClassANN function
-trainClassANN(topology, training_data, validationDataset=validation_data,
-              testDataset=test_data, transferFunctions=fill(σ, length(topology)),
-              maxEpochs=max_epochs, minLoss=min_loss,
-              learningRate=learning_rate, maxEpochsVal=max_epochs_val)
-
-
-
-
-
-
-
-
-
-
 include("35634619Y_48114048A_32740686W_48111913F.jl")
 
 # Step 4: Define tests for binary classification

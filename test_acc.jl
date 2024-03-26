@@ -28,8 +28,14 @@ end
 # 2º
 @testset "Accuracy function 1" begin
     # Test case 1
-    outputs = [true true; false false; true false; false true]
-    targets = [true false; true false; true true; true true]
+    outputs = [true false; 
+                false false; 
+                false false; 
+                true true]
+    targets = [true false; 
+                true true; 
+                true true; 
+                true true]
     @test isequal(0.5, accuracy(outputs, targets))
 
     # Test case 2
@@ -126,13 +132,15 @@ end
 
     # Test 3: Matriz de 2x2 con valores correctos
     outputs3 = [0.8 0.4; 0.6 0.9]
-    targets3 = [true false; true true]
-    @test accuracy(outputs3, targets3) == 0.75
+    targets3 = [true false; 
+                false true]
+    @test accuracy(outputs3, targets3) == 1
 
     # Test 4: Matriz de 2x2 con valores incorrectos
-    outputs4 = [0.2 0.7; 0.3 0.1]
-    targets4 = [true false; true true]
-    @test accuracy(outputs4, targets4) == 0.25
+    outputs4 = [0.6 0.2; 0.3 0.1]
+    targets4 = [true false; 
+                true true]
+    @test accuracy(outputs4, targets4) == 0.5
 
     # Test 5: Matriz de 2x1 con valores correctos
     outputs5 = [0.8; 0.9]
